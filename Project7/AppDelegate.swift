@@ -15,7 +15,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //we're using this to create a second view controller, via code
+        //create new storyboard - window where our view controllers are seen - downcast the root controller as a UITabBarController
+        //referencing the Main.storyboard file in the current app bundle, we create a new VC using the NavController ID - the vc is WRAPPED inside the nav controller
+        //we create a new UITabBarItem and give it a tag of 1
+        //we add that newly created VC to our tab bar controller's array of vcs
+        
+        if let tabBarController = window?.rootViewController as? UITabBarController {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "NavController")
+            vc.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 1)
+            tabBarController.viewControllers?.append(vc)
+        }
+        
+        
         return true
     }
 
